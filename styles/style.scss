@@ -1,0 +1,187 @@
+@import 'clear';
+
+@mixin ipad{
+    @media (max-width:700px){
+        @content;
+    }
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #FBDA61;
+    background-image: linear-gradient(45deg, #FBDA61 0%, #FF5ACD 100%);
+    min-height: 100vh;
+
+}
+
+.container{
+    background: white;
+    max-width: 120rem;
+    margin: 4vw auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 70vh;
+    border-radius: 6px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.502);
+}
+// üst kısım
+
+.logo{
+    grid-area: logo;
+} 
+.search_form{
+    grid-area: search;
+}
+
+.likes{
+    grid-area: likes;
+}
+
+header{
+    display: grid;
+    padding: 0 20px;
+    background: #f9f5f3;
+    grid-template-areas: 'logo search likes';
+       @include ipad{
+        grid-template-areas: 
+        "logo likes"
+        "search search";
+
+       }
+    }
+  
+    .logo{
+        display: flex;
+        align-items: center;
+        img{
+            height: 100px;
+        }
+        a{}
+    }
+
+    .search_form{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @include ipad{
+            margin-bottom: 30px;
+        }
+    }
+    form {
+        background: white;
+        border-radius: 40px;
+        display: flex;
+        align-items: center;
+        transition: all 0.3s;
+        &:focus-within{
+            transform: translateY(-2px);
+            box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+        }
+        input{
+            border: none;
+            font-size: 14px;
+            width: 300px;
+            outline: none;
+            padding: 3px 8px;
+            &::placeholder{
+                color: #dad0cc;
+            }
+        }
+        button{
+            border-radius: 40px;
+            padding: 10px 30px;
+            background-image: linear-gradient(
+            45deg,
+             #FBDA61 0%,
+              #FF5ACD 100%
+              );
+              color: white;
+              transition: all 0.3s;
+              cursor: pointer;
+              &:hover{
+                scale: 1.1;
+              }
+
+        }
+    }
+
+    .likes{
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        font-size: 25px;
+        cursor: pointer;
+        margin-left: 60px;
+        @include ipad{
+            margin-left: unset;
+        }
+        .bi{
+            &:hover{
+                color: gray;
+            }
+        }
+    }
+
+
+
+// ana icerik
+main{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    height: 100%;
+    section{
+        height: 100%;
+
+    }
+}
+
+.results{
+    display: flex;
+    flex-direction: column;
+    .result-link{
+        background: white;
+        border-top: white;
+        cursor: pointer;
+        display: flex;
+        padding: 10px 20px;
+        gap: 20px;
+        align-items: center;
+        transition: all 0.3s;
+       
+        &:hover{
+            transform: translateY(-2px);
+            background: #f9f5f3;
+        }
+        img{
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+        .data{
+            h4{
+                color: #fbda61;
+                text-overflow: ellipsis;
+                max-width: 350px;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+        }
+    }
+}
+.recipe{
+    background: #f9f5f3;
+}
+.shopping{}
+
+
+// loader
+.loader{
+    margin: 80px auto;
+    img{
+        width: 150px;
+    }
+}
