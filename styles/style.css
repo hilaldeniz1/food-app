@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 a {
   text-decoration: none;
   color: black;
@@ -16,9 +17,10 @@ button {
 }
 
 body {
-  background-color: #FBDA61;
-  background-image: linear-gradient(45deg, #FBDA61 0%, #FF5ACD 100%);
+  background-color: #fbda61;
+  background-image: linear-gradient(45deg, #fbda61 0%, #ff5acd 100%);
   min-height: 100vh;
+  font-family: "poppins";
 }
 
 .container {
@@ -30,6 +32,12 @@ body {
   min-height: 70vh;
   border-radius: 6px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.502);
+}
+@media (max-width: 1200px) {
+  .container {
+    margin: auto;
+    min-height: 100vh;
+  }
 }
 
 .logo {
@@ -101,7 +109,7 @@ form input::placeholder {
 form button {
   border-radius: 40px;
   padding: 10px 30px;
-  background-image: linear-gradient(45deg, #FBDA61 0%, #FF5ACD 100%);
+  background-image: linear-gradient(45deg, #fbda61 0%, #ff5acd 100%);
   color: white;
   transition: all 0.3s;
   cursor: pointer;
@@ -131,6 +139,12 @@ main {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   height: 100%;
+  flex-grow: 1;
+}
+@media (max-width: 1200px) {
+  main {
+    grid-template-columns: 1fr;
+  }
 }
 main section {
   height: 100%;
@@ -162,13 +176,180 @@ main section {
 .results .result-link .data h4 {
   color: #fbda61;
   text-overflow: ellipsis;
-  max-width: 350px;
+  max-width: 200px;
   overflow: hidden;
   white-space: nowrap;
+}
+@media (max-width: 1200px) {
+  .results .result-link .data h4 {
+    max-width: 500px;
+  }
 }
 
 .recipe {
   background: #f9f5f3;
+}
+
+.recipe figure {
+  height: 300px;
+  position: relative;
+}
+.recipe figure::before {
+  content: "";
+  display: block;
+  background-image: linear-gradient(90deg, #a9c9ff 0%, #ffbbec 100%);
+  opacity: 0.6;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.recipe figure img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.recipe figure h1 {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 20%) skewY(-6deg);
+  color: white;
+  font-weight: 600;
+  background-color: #a9c9ff;
+  background-image: linear-gradient(90deg, #a9c9ff 0%, #ffbbec 100%);
+  white-space: nowrap;
+  padding: 10px 30px;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.538);
+}
+.recipe figure .like-area {
+  display: flex;
+  justify-content: end;
+  padding: 20px;
+}
+.recipe figure .like-area i {
+  font-size: 26px;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 300ms;
+}
+.recipe figure .like-area i:hover {
+  background: rgb(187, 187, 187);
+}
+
+.recipe .ingredients {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+  margin: 40px 0 0;
+}
+.recipe .ingredients ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 20px;
+  -moz-column-gap: 40px;
+       column-gap: 40px;
+}
+@media (max-width: 700px) {
+  .recipe .ingredients ul {
+    grid-template-columns: 1fr;
+  }
+}
+.recipe .ingredients ul li {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+}
+.recipe .ingredients ul li i {
+  color: #a9c9ff;
+}
+.recipe .ingredients ul li p {
+  white-space: nowrap;
+  max-width: 289px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media (max-width: 700px) {
+  .recipe .ingredients ul li p {
+    max-width: 450px;
+  }
+}
+@media (max-width: 500px) {
+  .recipe .ingredients ul li p {
+    max-width: 300px;
+  }
+}
+.recipe .ingredients button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  margin-top: 30px;
+  padding: 10px;
+  color: white;
+  font-weight: 600;
+  background-image: linear-gradient(90deg, #a9c9ff 0%, #ffbbec 100%);
+  transition: all 300ms;
+  max-width: 500px;
+  width: 100%;
+  margin: 50px auto;
+  font-size: 15px;
+}
+.recipe .ingredients button span,
+.recipe .ingredients button i {
+  pointer-events: none;
+}
+.recipe .ingredients button i {
+  font-size: 20px;
+}
+.recipe .ingredients button:hover {
+  scale: 0.95;
+}
+
+.recipe .directions {
+  text-align: center;
+  padding-bottom: 40px;
+}
+.recipe .directions h2 {
+  transform: skewY(-3deg);
+  font-weight: 600;
+  font-size: 30px;
+  color: #ffbbec;
+  text-shadow: 0 0 30px #ffbbec;
+}
+.recipe .directions p {
+  padding: 50px;
+}
+.recipe .directions p span {
+  color: #ffbbec;
+}
+.recipe .directions a {
+  padding: 10px 30px;
+  border: 1px solid #a9c9ff;
+  border-radius: 30px;
+}
+.recipe .directions a:hover {
+  background: #a9c9ff;
+  color: white;
+}
+
+.shopping {
+  padding: 5px 2px;
+}
+.shopping h2 {
+  text-align: center;
+  color: #a9c9ff;
+}
+.shopping ul {
+  overflow-x: auto;
+}
+.shopping ul li {
+  list-style: none;
 }
 
 .loader {
