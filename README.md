@@ -40,6 +40,10 @@
 
 - - basket dizisindeki bütün ürünleri sepet alanında ekrana bas
 
+### 'Deploy'
+
+https://ornate-haupia-5fa7a3.netlify.app
+
 ### 'Screen'
 
 ![](screen-food.gif)
