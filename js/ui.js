@@ -45,7 +45,10 @@ export const renderBasketItems = (items) => {
   const markup = items
     .map(
       (item) => `
-    <li>${item.title}</li>
+    <li data-id=${item.id}>
+    <i id="delete-item" class="bi bi-x"></i>
+    <span>${item.title}</span>
+    </li>
     `
     )
     .join("");

@@ -1,5 +1,10 @@
 import { v4 } from "https://jspm.dev/uuid";
-import { elements } from "./js/helpers.js";
+import {
+  elements,
+  setLocalStorage,
+  getFromLocal,
+  controlBtn,
+} from "./js/helpers.js";
 import { Search } from "./js/api.js";
 import {
   clearLoader,
@@ -63,6 +68,9 @@ const controlRecipe = async () => {
       clearLoader();
       //   ekrana tarif arayüzünü bas
       recipe.renderRecipe(recipe.info);
+
+      // tarif arayüzüne scroll u kaydır
+      elements.recipeArea.scrollIntoView({ behavior: "smooth" });
     } catch (err) {
       alert("Verileri alırken hata olustu");
       clearLoader();
@@ -73,7 +81,19 @@ const controlRecipe = async () => {
 ["hashchange", "load"].forEach((event) => {
   window.addEventListener(event, controlRecipe);
 });
-const basket = [];
+
+// !sepet alanı
+// local storage da sepet dizisi varsa onu al
+// ama basket degeri undefined sa o zaman bos dızi [] tanımla
+let basket = getFromLocal("basket") || [];
+
+// sayfanın yuklenme olayını ızle
+document.addEventListener("DOMContentLoaded", () => {
+  renderBasketItems(basket);
+  // sepette eleman varsa butonu goster
+  controlBtn(basket);
+});
+
 // tarif alanındaki tıklanmaLarda calısır
 const handleClick = (e) => {
   if (e.target.id === "add-to-basket") {
@@ -87,10 +107,68 @@ const handleClick = (e) => {
       // yeni olusan  tarifi sepete ekle
       basket.push(newItem);
     });
+
+    // sepeti local storage a kaydetme
+    setLocalStorage("basket", basket);
+
     // ekrana sepet elemanlarını basma
     renderBasketItems(basket);
+
+    // sepete ekle butonunu goster
+    controlBtn(basket);
+  }
+  if (e.target.id === "like-btn") {
+    recipe.controlLike();
+  }
+};
+
+// sepetten eleman kaldırma
+const deleteItem = (e) => {
+  // console.log(basket);
+  if (e.target.id === "delete-item") {
+    // kapsayıcıya erisme
+    const parent = e.target.parentElement;
+
+    // secilen urunu diziden kaldırabılmek ıcın id ye erısme
+    basket = basket.filter((i) => i.id !== parent.dataset.id);
+
+    // console.log(basket);
+
+    // local storage ı guncelleme
+    setLocalStorage("basket", basket);
+
+    // elemanı html den kaldırma
+    parent.remove();
+
+    // temizle butonunu konrol eder
+    controlBtn(basket);
+  }
+};
+
+// sepette tümünü temizle
+const handleClear = () => {
+  // kullanıcıdan onay alma
+  const res = confirm("Bütün sepet silinecek! Emin misiniz?");
+  // kullanıcı onaylarsa calısır
+  if (res) {
+    // local i temizle
+    setLocalStorage("basket", null);
+    // sepet dizisini sıfırlama
+    basket = [];
+
+    // butonu ortadan kaldırma
+    controlBtn(basket);
+
+    // arayüzü temizleme
+    elements.basketList.innerHTML = "";
   }
 };
 
 // sepete ekle butonuna tıklanmayı ızle
 elements.recipeArea.addEventListener("click", handleClick);
+
+// sepet üzerinde tıklanma olaylarını izler
+elements.basketList.addEventListener("click", deleteItem);
+
+// temizle butonuna tıklanmayı izler
+elements.clearBtn.addEventListener("click", handleClear);

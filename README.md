@@ -39,3 +39,7 @@
 - - malzemelerını `basket ` dizisine aktar
 
 - - basket dizisindeki bütün ürünleri sepet alanında ekrana bas
+
+### 'Screen'
+
+![](screen-food.gif)

@@ -129,12 +129,48 @@ form {
   font-size: 25px;
   cursor: pointer;
   margin-left: 60px;
+  position: relative;
   @include ipad {
     margin-left: unset;
   }
+  &:hover > .list {
+    visibility: visible;
+    opacity: 1;
+  }
+
   .bi {
     &:hover {
       color: gray;
+    }
+  }
+
+  .list {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 1s, visibility 1s;
+    position: absolute;
+    bottom: -100px;
+    background: rgb(121, 121, 121);
+    min-width: 240px;
+    min-height: 140px;
+    z-index: 1000;
+    border-radius: 20px;
+    padding: 10px;
+    a {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      border-bottom: 1px solid white;
+      padding: 5px;
+      img {
+        height: 70px;
+        width: 50px;
+        border-radius: 50%;
+      }
+      p {
+        font-size: 15px;
+        color: white;
+      }
     }
   }
 }
@@ -338,11 +374,34 @@ main {
   h2 {
     text-align: center;
     color: #a9c9ff;
+    margin: 30px;
+  }
+  .button-area {
+    display: flex;
+    justify-content: end;
+    button {
+      display: none;
+      gap: 5px;
+      background: rgb(221, 0, 0);
+      color: white;
+      cursor: pointer;
+      transition: background 300ms, scale 200ms;
+      &:hover {
+        background: rgb(139, 0, 0);
+        scale: 0.9;
+      }
+    }
   }
   ul {
     overflow-x: auto;
     li {
       list-style: none;
+      padding: 5px;
+      border-bottom: 1px solid gray;
+
+      i {
+        cursor: pointer;
+      }
     }
   }
 }
@@ -353,4 +412,9 @@ main {
   img {
     width: 150px;
   }
+}
+
+// like butonu
+#like-btn {
+  color: rgb(134, 17, 36);
 }
